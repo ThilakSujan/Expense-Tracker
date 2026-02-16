@@ -1,0 +1,15 @@
+.pie-chart-container {
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1 / 1;   /* keeps chart perfectly square */
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+  .pie-chart-container {
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+}

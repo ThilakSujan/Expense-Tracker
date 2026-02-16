@@ -1,0 +1,24 @@
+.monthly-summary {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.monthly-summary h3 {
+  margin-bottom: 12px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.summary-row .income {
+  color: var(--income);
+}
+
+.summary-row .expense {
+  color: var(--expense);
+}

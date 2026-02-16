@@ -1,0 +1,68 @@
+.transaction-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.transaction-form input,
+.transaction-form select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.transaction-form button {
+  grid-column: span 2;
+  padding: 10px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.transaction-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.transaction-form input,
+.transaction-form select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Button styling */
+.transaction-btn {
+  background: #107c41;   /* Excel green */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: auto;
+  white-space: nowrap;
+}
+
+.transaction-btn:hover {
+  background: #0e6f39;
+  transform: translateY(-2px);
+}
+
+/* Responsive fix */
+@media (max-width: 600px) {
+  .transaction-form {
+    flex-direction: column;
+  }
+
+  .transaction-btn {
+    width: 100%;
+  }
+}

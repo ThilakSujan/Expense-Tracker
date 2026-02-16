@@ -1,0 +1,35 @@
+.income-expense {
+  display: flex;
+  gap: 16px;
+}
+
+.income-expense .card {
+  flex: 1;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.income-expense .income h2 {
+  color: var(--income);
+}
+
+.income-expense .expense h2 {
+  color: var(--expense);
+}
+
+.month-label {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .income-expense {
+    grid-template-columns: 1fr;
+  }
+}
+

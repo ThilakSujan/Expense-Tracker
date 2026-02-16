@@ -1,0 +1,10 @@
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty-text {
+  text-align: center;
+  color: #777;
+}
