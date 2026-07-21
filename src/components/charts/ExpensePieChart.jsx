@@ -84,9 +84,26 @@ const ExpensePieChart = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const hasData = Object.keys(categoryMap).length > 0;
+
   return (
-    <div className="pie-chart-container">
-      <Pie ref={chartRef} data={data} options={options} />
+    <div 
+      className="pie-chart-container" 
+      style={!hasData ? { display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', gap: '10px' } : {}}
+    >
+      {hasData ? (
+        <Pie ref={chartRef} data={data} options={options} />
+      ) : (
+        <>
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2v10l5.5 5.5"></path>
+          </svg>
+          <p style={{ color: "var(--text-muted)", fontSize: "15px", fontWeight: "500", textAlign: "center" }}>
+            No expenses for this month
+          </p>
+        </>
+      )}
     </div>
   );
 };

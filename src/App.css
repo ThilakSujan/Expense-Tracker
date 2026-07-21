@@ -89,6 +89,12 @@ input, select {
   transition: all 0.3s ease;
 }
 
+/* Fix for native HTML dropdown options inheriting light text on default white dropdown background */
+select option {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+}
+
 input:focus, select:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25);
@@ -239,9 +245,12 @@ p {
     padding: 16px;
   }
   .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  .dashboard-header h1 {
+    font-size: 18px;
   }
   .glass-card {
     padding: 16px;

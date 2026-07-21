@@ -43,7 +43,11 @@ const Dashboard = () => {
       {/* 🔹 Header with Logout */}
       <div className="dashboard-header">
         <h1>Expense Tracker Dashboard</h1>
-        <Logout />
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <button onClick={() => navigate("/calendar")} className="nav-btn">Calendar</button>
+          <button onClick={() => navigate("/settings")} className="nav-btn">Settings</button>
+          <Logout />
+        </div>
       </div>
 
 
