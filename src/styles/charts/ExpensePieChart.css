@@ -3,7 +3,12 @@
   max-width: 450px;
   aspect-ratio: 1 / 1;   /* keeps chart perfectly square */
   margin: 0 auto;
-  padding: 10px;
+  padding: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
 }
 
 /* Mobile optimization */

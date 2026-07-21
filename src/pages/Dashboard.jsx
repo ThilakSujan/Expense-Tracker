@@ -41,20 +41,8 @@ const Dashboard = () => {
     <div className="dashboard-container">
 
       {/* 🔹 Header with Logout */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "25px",
-          marginTop: "10px",
-          width: "100%",
-        }}
-      >
-        <h1 style={{ margin: 0 }}>
-          Expense Tracker Dashboard
-        </h1>
-
+      <div className="dashboard-header">
+        <h1>Expense Tracker Dashboard</h1>
         <Logout />
       </div>
 

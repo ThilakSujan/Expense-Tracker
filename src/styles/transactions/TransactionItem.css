@@ -4,8 +4,10 @@
   align-items: center;
   padding: 18px 20px;
   border-radius: 14px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
   margin-bottom: 14px;
   border-left: 5px solid transparent;
 }
@@ -28,33 +30,36 @@
 .transaction-item .amount {
   font-size: 20px;
   font-weight: 600;
+  color: var(--text-main);
 }
 
 .transaction-item .reason {
   font-size: 14px;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-main);
 }
 
 .transaction-item .meta {
   font-size: 13px;
-  color: #6b7280;
+  color: var(--text-muted);
 }
 
 /* RIGHT ACTION BOX */
 .actions {
   display: flex;
   gap: 10px;
-  background: #f9fafb;
+  background: rgba(15, 23, 42, 0.4);
   padding: 8px;
   border-radius: 10px;
+  border: 1px solid var(--glass-border);
 }
 
 /* ACTION BUTTONS */
 .actions button {
-  background: lightblue;
-  border: 1px solid #e5e7eb;
-  padding: 6px 8px;
+  background: rgba(139, 92, 246, 0.2);
+  color: var(--text-main);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  padding: 6px 12px;
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
@@ -62,5 +67,5 @@
 }
 
 .actions button:hover {
-  background: #f3f4f6;
+  background: rgba(139, 92, 246, 0.4);
 }

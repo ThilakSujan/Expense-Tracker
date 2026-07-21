@@ -51,21 +51,29 @@ const MonthlyBarChart = () => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    color: "#f8fafc",
     plugins: {
       legend: {
         display: false,
       },
       title: {
         display: true,
-        text: "Monthly Overview",
+        text: "Income vs Expense",
+        color: "#f8fafc",
         font: {
           size: 18,
         },
       },
     },
     scales: {
+      x: {
+        ticks: { color: "#cbd5e1" },
+        grid: { color: "rgba(255, 255, 255, 0.1)" }
+      },
       y: {
         beginAtZero: true,
+        ticks: { color: "#cbd5e1" },
+        grid: { color: "rgba(255, 255, 255, 0.1)" }
       },
     },
   };

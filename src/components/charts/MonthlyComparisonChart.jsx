@@ -65,14 +65,24 @@ const MonthlyComparisonChart = () => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    color: "#f8fafc",
     plugins: {
       legend: {
         position: "bottom",
+        labels: {
+          color: "#f8fafc"
+        }
       },
     },
     scales: {
+      x: {
+        ticks: { color: "#cbd5e1" },
+        grid: { color: "rgba(255, 255, 255, 0.1)" }
+      },
       y: {
         beginAtZero: true,
+        ticks: { color: "#cbd5e1" },
+        grid: { color: "rgba(255, 255, 255, 0.1)" }
       },
     },
   };
@@ -80,7 +90,7 @@ const MonthlyComparisonChart = () => {
   return (
     <div className="comparison-card">
       <div className="comparison-header">
-        <h3>Monthly Overview</h3>
+        <h3>Comparison over time</h3>
 
         <select
           value={monthsCount}

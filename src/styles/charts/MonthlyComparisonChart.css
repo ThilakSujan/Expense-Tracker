@@ -1,8 +1,10 @@
 .comparison-card {
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   padding: 24px;
   border-radius: 18px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--glass-shadow);
   width: 100%;
   max-width: 1000px;
 }
@@ -12,6 +14,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .comparison-card h3 {

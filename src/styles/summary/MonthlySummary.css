@@ -1,8 +1,10 @@
 .monthly-summary {
-  background: #ffffff;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   padding: 20px;
   border-radius: 14px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: var(--glass-shadow);
 }
 
 .monthly-summary h3 {

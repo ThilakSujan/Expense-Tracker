@@ -3,8 +3,17 @@
   max-width: 500px;
   height: 300px;
   margin: 20px auto;
-  background: white;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+@media (max-width: 600px) {
+  .bar-chart-container {
+    padding: 10px;
+    height: 250px;
+  }
 }

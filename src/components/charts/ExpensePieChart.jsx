@@ -41,7 +41,7 @@ const ExpensePieChart = () => {
           "#3b82f6",
           "#8b5cf6",
         ],
-        borderColor: "#ffffff",
+        borderColor: "rgba(15, 23, 42, 0.8)",
         borderWidth: 2,
       },
     ],

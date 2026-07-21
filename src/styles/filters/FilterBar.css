@@ -7,8 +7,10 @@
 .filter-bar select {
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  background: #ffffff;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
 }
 
 /* Clear filter button */
@@ -16,7 +18,7 @@
   padding: 8px 14px;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
-  background-color: #ffffff;
+  background-color: transparent;
   color: #374151;
   font-size: 14px;
   font-weight: 500;
