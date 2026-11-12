@@ -1,10 +1,7 @@
 {
-<<<<<<< HEAD
-=======
   "firestore": {
     "rules": "firestore.rules"
   },
->>>>>>> c56b658 (Altered Database and Authentication)
   "hosting": {
     "public": "dist",
     "rewrites": [

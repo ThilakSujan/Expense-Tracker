@@ -1,7 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-<<<<<<< HEAD
-import { loadTransactions, saveTransactions } from "../services/storage";
-=======
 import { useAuth } from "./AuthContext";
 import {
   subscribeToTransactions,
@@ -13,21 +10,13 @@ import {
   migrateLocalTransactions,
 } from "../services/firestoreService";
 import { loadTransactions } from "../services/storage";
->>>>>>> c56b658 (Altered Database and Authentication)
 
 const ExpenseContext = createContext();
 
 export const ExpenseProvider = ({ children }) => {
-<<<<<<< HEAD
-  const [transactions, setTransactions] = useState(() =>
-    loadTransactions()
-  );
-
-=======
   const { currentUser } = useAuth();
   const [transactions, setTransactions] = useState([]);
   const [isLoadingData, setIsLoadingData] = useState(true);
->>>>>>> c56b658 (Altered Database and Authentication)
   const [editingTransaction, setEditingTransaction] = useState(null);
 
   /* ================= Filters ================= */
@@ -44,39 +33,11 @@ export const ExpenseProvider = ({ children }) => {
   );
 
   /* ================= Budget ================= */
-<<<<<<< HEAD
-  const [monthlyBudget, setMonthlyBudget] = useState(() => {
-=======
   const [monthlyBudget, setMonthlyBudgetState] = useState(() => {
->>>>>>> c56b658 (Altered Database and Authentication)
     const saved = localStorage.getItem("monthlyBudget");
     return saved ? Number(saved) : 0;
   });
 
-<<<<<<< HEAD
-  useEffect(() => {
-    localStorage.setItem("monthlyBudget", monthlyBudget);
-  }, [monthlyBudget]);
-
-  /* ================= Save Transactions ================= */
-  useEffect(() => {
-    saveTransactions(transactions);
-  }, [transactions]);
-
-  /* ================= CRUD ================= */
-  const addTransaction = (txn) => {
-    setTransactions((prev) => [...prev, txn]);
-  };
-
-  const deleteTransaction = (id) => {
-    setTransactions((prev) => prev.filter((t) => t.id !== id));
-  };
-
-  const updateTransaction = (updatedTxn) => {
-    setTransactions((prev) =>
-      prev.map((t) => (t.id === updatedTxn.id ? updatedTxn : t))
-    );
-=======
   const setMonthlyBudget = (newBudget) => {
     const numeric = Number(newBudget);
     setMonthlyBudgetState(numeric);
@@ -125,7 +86,6 @@ export const ExpenseProvider = ({ children }) => {
 
   /* ================= CRUD Operations ================= */
   const addTransaction = async (txn) => {
-    // Generate id and timestamp if not provided
     const completeTxn = {
       ...txn,
       id: txn.id || Date.now().toString(),
@@ -155,7 +115,6 @@ export const ExpenseProvider = ({ children }) => {
         prev.map((t) => (t.id === updatedTxn.id ? updatedTxn : t))
       );
     }
->>>>>>> c56b658 (Altered Database and Authentication)
     setEditingTransaction(null);
   };
 
@@ -178,20 +137,12 @@ export const ExpenseProvider = ({ children }) => {
       const q = searchQuery.toLowerCase();
       return (
         txn.note?.toLowerCase().includes(q) ||
-<<<<<<< HEAD
-        txn.category.toLowerCase().includes(q)
-=======
-        txn.category.toLowerCase().includes(q) ||
+        txn.category?.toLowerCase().includes(q) ||
         txn.bank?.toLowerCase().includes(q)
->>>>>>> c56b658 (Altered Database and Authentication)
       );
     });
 
   /* ================= Budget Logic ================= */
-<<<<<<< HEAD
-
-=======
->>>>>>> c56b658 (Altered Database and Authentication)
   const currentMonthExpense = transactions
     .filter((txn) => {
       const d = new Date(txn.createdAt);
@@ -209,20 +160,12 @@ export const ExpenseProvider = ({ children }) => {
   const isWithinBudget =
     monthlyBudget > 0 && currentMonthExpense <= monthlyBudget;
 
-<<<<<<< HEAD
-  /* ================= Provider ================= */
-
-=======
->>>>>>> c56b658 (Altered Database and Authentication)
   return (
     <ExpenseContext.Provider
       value={{
         transactions,
         filteredTransactions,
-<<<<<<< HEAD
-=======
         isLoadingData,
->>>>>>> c56b658 (Altered Database and Authentication)
 
         addTransaction,
         deleteTransaction,
