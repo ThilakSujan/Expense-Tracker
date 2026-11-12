@@ -8,7 +8,10 @@ import "./App.css";
 import "./styles/CalendarSettings.css";
 function App() {
   const { currentUser } = useAuth();
+<<<<<<< HEAD
   console.log(currentUser);
+=======
+>>>>>>> c56b658 (Altered Database and Authentication)
 
   return (
     <BrowserRouter>

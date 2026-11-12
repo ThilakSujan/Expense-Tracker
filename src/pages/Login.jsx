@@ -4,10 +4,16 @@ import { useNavigate } from "react-router-dom";
 import "../styles/auth/Login.css";
 
 const Login = () => {
+<<<<<<< HEAD
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
   const [isLoginView, setIsLoginView] = useState(true);
+=======
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+>>>>>>> c56b658 (Altered Database and Authentication)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,6 +23,7 @@ const Login = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
+<<<<<<< HEAD
     
     try {
       if (isLoginView) {
@@ -30,6 +37,15 @@ const Login = () => {
       }
     } catch (err) {
       setError(isLoginView ? "Invalid email or password. Please try again." : "Failed to create account. Please try again.");
+=======
+
+    try {
+      await login(email, password);
+      navigate("/");
+    } catch (err) {
+      console.error("Login attempt failed:", err);
+      setError("Invalid email or password. Access is restricted to authorized clients.");
+>>>>>>> c56b658 (Altered Database and Authentication)
     } finally {
       setLoading(false);
     }
@@ -51,12 +67,17 @@ const Login = () => {
           </div>
           <h1 className="app-title">ExpenseTracker</h1>
           <p className="app-subtitle">
+<<<<<<< HEAD
             Manage your finances with clarity and ease.
+=======
+            Private Client Portal
+>>>>>>> c56b658 (Altered Database and Authentication)
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
           <h2 className="form-title">
+<<<<<<< HEAD
             {isLoginView ? "Welcome Back" : "Create an Account"}
           </h2>
           
@@ -64,6 +85,15 @@ const Login = () => {
 
           <div className="input-group">
             <label htmlFor="email">Email</label>
+=======
+            Sign In to Your Account
+          </h2>
+
+          {error && <div className="error-message">{error}</div>}
+
+          <div className="input-group">
+            <label htmlFor="email">Email Address</label>
+>>>>>>> c56b658 (Altered Database and Authentication)
             <div className="input-wrapper">
               <svg className="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -72,7 +102,11 @@ const Login = () => {
               <input
                 id="email"
                 type="email"
+<<<<<<< HEAD
                 placeholder="you@example.com"
+=======
+                placeholder="client@domain.com"
+>>>>>>> c56b658 (Altered Database and Authentication)
                 className="login-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -102,6 +136,7 @@ const Login = () => {
           </div>
 
           <button type="submit" className="login-button" disabled={loading}>
+<<<<<<< HEAD
             {loading ? (
               <span className="spinner"></span>
             ) : (
@@ -123,6 +158,15 @@ const Login = () => {
             >
               {isLoginView ? "Sign up" : "Sign in"}
             </button>
+=======
+            {loading ? <span className="spinner"></span> : "Sign In"}
+          </button>
+        </form>
+
+        <div className="toggle-view" style={{ fontSize: "13px", color: "rgba(255, 255, 255, 0.6)", textAlign: "center" }}>
+          <p>
+            Private Portal • Access is restricted to pre-authorized accounts.
+>>>>>>> c56b658 (Altered Database and Authentication)
           </p>
         </div>
 
@@ -131,7 +175,11 @@ const Login = () => {
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
+<<<<<<< HEAD
           Secure • Private • Cloud Synced
+=======
+          Encrypted • Private • Isolated Database
+>>>>>>> c56b658 (Altered Database and Authentication)
         </p>
       </div>
     </div>

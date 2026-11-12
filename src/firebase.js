@@ -1,5 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+<<<<<<< HEAD
+=======
+import { getFirestore } from "firebase/firestore";
+>>>>>>> c56b658 (Altered Database and Authentication)
 
 const firebaseConfig = {
   apiKey: "AIzaSyC2t3B-wbSkB0fEbC9OGZNrnz1WAOLPYEI",
@@ -12,4 +16,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+<<<<<<< HEAD
 export const auth = getAuth(app);
+=======
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+>>>>>>> c56b658 (Altered Database and Authentication)
