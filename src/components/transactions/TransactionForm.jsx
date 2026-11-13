@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useExpense } from "../../context/ExpenseContext";
 import { CATEGORIES } from "../../constants/categories";
 import { PAYMENT_MODES, getPaymentModeIcon } from "../../constants/paymentModes";
+import {
+  Plus,
+  Check,
+  X,
+  Building,
+  Calendar as CalendarIcon,
+  Tag,
+  CreditCard,
+  FileText,
+} from "lucide-react";
 import "../../styles/transactions/TransactionForm.css";
 
 const getTodayString = () => new Date().toISOString().split("T")[0];
 
-const TransactionForm = () => {
+const QUICK_AMOUNTS = [100, 500, 1000, 2000, 5000];
+
+const TransactionForm = ({ onFinished }) => {
   const {
     banks,
     addTransaction,
@@ -59,6 +72,11 @@ const TransactionForm = () => {
     }
   };
 
+  const handleQuickAmount = (val) => {
+    const current = Number(amount) || 0;
+    setAmount(current + val);
+  };
+
   const resetForm = () => {
     setAmount("");
     setType("expense");
@@ -68,6 +86,7 @@ const TransactionForm = () => {
     setDate(getTodayString());
     setNote("");
     setEditingTransaction(null);
+    if (onFinished) onFinished();
   };
 
   const handleSubmit = (e) => {
@@ -103,92 +122,190 @@ const TransactionForm = () => {
   };
 
   return (
-    <form className="transaction-form" onSubmit={handleSubmit}>
-      {/* Amount */}
-      <input
-        type="number"
-        step="any"
-        min="0.01"
-        placeholder="Amount (₹)"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        required
-      />
+    <motion.div
+      className="transaction-form-wrapper glass-card"
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="form-top-bar">
+        <div className="form-heading">
+          <h3>{editingTransaction ? "Edit Transaction" : "New Transaction Entry"}</h3>
+          <p className="form-subtext">Record manual financial transaction</p>
+        </div>
 
-      {/* Type */}
-      <select value={type} onChange={(e) => setType(e.target.value)}>
-        <option value="expense">Expense</option>
-        <option value="income">Income</option>
-      </select>
+        {/* Type Toggle Segmented Control */}
+        <div className="type-toggle-pill">
+          <button
+            type="button"
+            className={`type-btn expense ${type === "expense" ? "active" : ""}`}
+            onClick={() => setType("expense")}
+          >
+            Debit (Expense)
+          </button>
+          <button
+            type="button"
+            className={`type-btn income ${type === "income" ? "active" : ""}`}
+            onClick={() => setType("income")}
+          >
+            Credit (Income)
+          </button>
+        </div>
+      </div>
 
-      {/* Bank Account Selection */}
-      <select
-        value={bank}
-        onChange={(e) => handleBankChange(e.target.value)}
-        title="Select Bank / Payment Source"
-      >
-        {banks.map((b) => (
-          <option key={b} value={b}>
-            🏦 {b}
-          </option>
-        ))}
-      </select>
+      <form onSubmit={handleSubmit} className="redesigned-form">
+        {/* Row 1: Amount & Quick Amount chips */}
+        <div className="form-amount-group">
+          <div className="amount-input-wrapper">
+            <span className="currency-symbol">₹</span>
+            <input
+              type="number"
+              step="any"
+              min="0.01"
+              placeholder="0.00"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="amount-large-input"
+              required
+              autoFocus={!editingTransaction}
+            />
+          </div>
 
-      {/* Mode of Transaction */}
-      <select
-        value={mode}
-        onChange={(e) => setMode(e.target.value)}
-        title="Mode of Transaction (Cash, UPI, Card, etc.)"
-      >
-        {PAYMENT_MODES.map((m) => (
-          <option key={m} value={m}>
-            {getPaymentModeIcon(m)} {m}
-          </option>
-        ))}
-      </select>
+          <div className="quick-amount-chips">
+            {QUICK_AMOUNTS.map((amt) => (
+              <button
+                key={amt}
+                type="button"
+                className="quick-chip"
+                onClick={() => handleQuickAmount(amt)}
+              >
+                +₹{amt}
+              </button>
+            ))}
+            {amount && (
+              <button
+                type="button"
+                className="quick-chip clear"
+                onClick={() => setAmount("")}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
 
-      {/* Category */}
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
-        {CATEGORIES.map((c) => (
-          <option key={c} value={c}>
-            {c}
-          </option>
-        ))}
-      </select>
+        {/* Row 2: Bank, Mode, Category, Date */}
+        <div className="form-fields-grid">
+          {/* Bank Selection */}
+          <div className="input-field">
+            <label>
+              <Building size={14} /> Bank / Source
+            </label>
+            <select
+              value={bank}
+              onChange={(e) => handleBankChange(e.target.value)}
+            >
+              {banks.map((b) => (
+                <option key={b} value={b}>
+                  🏦 {b}
+                </option>
+              ))}
+            </select>
+          </div>
 
-      {/* Date */}
-      <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-        required
-        title="Transaction Date"
-      />
+          {/* Payment Mode */}
+          <div className="input-field">
+            <label>
+              <CreditCard size={14} /> Payment Mode
+            </label>
+            <select
+              value={mode}
+              onChange={(e) => setMode(e.target.value)}
+            >
+              {PAYMENT_MODES.map((m) => (
+                <option key={m} value={m}>
+                  {getPaymentModeIcon(m)} {m}
+                </option>
+              ))}
+            </select>
+          </div>
 
-      {/* Note */}
-      <input
-        type="text"
-        placeholder="Note (optional)"
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-      />
+          {/* Category */}
+          <div className="input-field">
+            <label>
+              <Tag size={14} /> Category
+            </label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {CATEGORIES.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </div>
 
-      {/* Submit Action */}
-      <button type="submit" className="transaction-btn">
-        {editingTransaction ? "✓ Update" : "+ Add Transaction"}
-      </button>
+          {/* Transaction Date */}
+          <div className="input-field">
+            <label>
+              <CalendarIcon size={14} /> Date
+            </label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+          </div>
+        </div>
 
-      {/* Cancel button if editing */}
-      {editingTransaction && (
-        <button
-          type="button"
-          className="transaction-cancel-btn"
-          onClick={resetForm}
-        >
-          Cancel
-        </button>
-      )}
-    </form>
+        {/* Row 3: Description / Note & Submit Actions */}
+        <div className="form-bottom-row">
+          <div className="note-field">
+            <label>
+              <FileText size={14} /> Note / Remarks (Optional)
+            </label>
+            <input
+              type="text"
+              placeholder="e.g. Grocery at Supermarket, Client Invoice #102..."
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
+          </div>
+
+          <div className="form-action-buttons">
+            {editingTransaction && (
+              <button
+                type="button"
+                className="cancel-action-btn"
+                onClick={resetForm}
+              >
+                <X size={16} /> Cancel
+              </button>
+            )}
+
+            <motion.button
+              type="submit"
+              className={`submit-action-btn ${type === "income" ? "income-submit" : "expense-submit"}`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {editingTransaction ? (
+                <>
+                  <Check size={18} /> Update Transaction
+                </>
+              ) : (
+                <>
+                  <Plus size={18} /> Record {type === "income" ? "Income" : "Expense"}
+                </>
+              )}
+            </motion.button>
+          </div>
+        </div>
+      </form>
+    </motion.div>
   );
 };
 

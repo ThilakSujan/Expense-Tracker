@@ -1,0 +1,151 @@
+/* ========================================================
+   APP LAYOUT STYLES (Sidebar + Main Viewport)
+   ======================================================== */
+
+.app-layout-root {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: var(--bg-dark);
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  background-attachment: fixed;
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Main Viewport */
+.app-main-viewport {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 18px 24px 32px 24px;
+}
+
+.app-content-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.page-content-wrapper {
+  flex: 1;
+}
+
+/* Completion Footer */
+.completion-footer {
+  margin-top: 36px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  position: relative;
+}
+
+.completion-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), rgba(16, 185, 129, 0.5), transparent);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.footer-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-shield-icon {
+  color: var(--income);
+}
+
+.footer-brand-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.footer-subtext {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.footer-center-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--input-bg);
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+}
+
+.footer-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.back-to-top-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-to-top-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .app-main-viewport {
+    padding: 12px 14px 24px 14px;
+  }
+}
+
+@media (max-width: 680px) {
+  .completion-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-right-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
