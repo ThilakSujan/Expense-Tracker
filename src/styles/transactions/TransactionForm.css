@@ -1,40 +1,39 @@
 .transaction-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.transaction-form input,
-.transaction-form select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--glass-border);
-}
-
-.transaction-form button {
-  grid-column: span 2;
-  padding: 10px;
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.transaction-form {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+  align-items: center;
   margin-top: 20px;
+  margin-bottom: 24px;
+  background: var(--glass-bg, rgba(255, 255, 255, 0.05));
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
 }
 
 .transaction-form input,
 .transaction-form select {
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border, #ccc);
+  background: rgba(15, 23, 42, 0.6);
+  color: #fff;
   font-size: 14px;
+  flex: 1 1 140px;
+  min-width: 130px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.transaction-form input:focus,
+.transaction-form select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.transaction-form select option {
+  background: #1e293b;
+  color: #fff;
 }
 
 /* Button styling */
@@ -42,12 +41,11 @@
   background: #107c41;   /* Excel green */
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s ease;
-  width: auto;
   white-space: nowrap;
 }
 
@@ -56,13 +54,31 @@
   transform: translateY(-2px);
 }
 
+.transaction-cancel-btn {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+.transaction-cancel-btn:hover {
+  background: rgba(239, 68, 68, 0.35);
+  color: #fff;
+}
+
 /* Responsive fix */
 @media (max-width: 600px) {
   .transaction-form {
     flex-direction: column;
   }
 
-  .transaction-btn {
+  .transaction-btn,
+  .transaction-cancel-btn {
     width: 100%;
   }
 }

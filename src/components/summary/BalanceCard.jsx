@@ -5,9 +5,7 @@ const BalanceCard = () => {
   const { transactions, selectedMonth, selectedYear } = useExpense();
 
   const monthlyTransactions = transactions.filter((txn) => {
-    if (!txn.date) return true;
-
-    const txnDate = new Date(txn.date);
+    const txnDate = new Date(txn.date || txn.createdAt);
     return (
       txnDate.getMonth() === selectedMonth &&
       txnDate.getFullYear() === selectedYear
@@ -28,7 +26,9 @@ const BalanceCard = () => {
   return (
     <div className="balance-card">
       <h3>{monthName} Balance</h3>
-      <h1>₹{balance}</h1>
+      <h1 className={balance >= 0 ? "balance-positive" : "balance-negative"}>
+        {balance >= 0 ? "+" : ""}₹{balance.toLocaleString("en-IN")}
+      </h1>
     </div>
   );
 };

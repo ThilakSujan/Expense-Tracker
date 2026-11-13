@@ -1,17 +1,19 @@
 export const exportToCSV = (transactions, month, year) => {
-  if (!transactions.length) return;
+  if (!transactions || !transactions.length) return;
 
   const headers = [
     "Date",
     "Time",
     "Type",
+    "Bank / Source",
+    "Payment Mode",
     "Category",
     "Note",
-    "Amount",
+    "Amount (INR)",
   ];
 
   const rows = transactions.map((txn) => {
-    const d = new Date(txn.createdAt);
+    const d = new Date(txn.date || txn.createdAt);
 
     const date = d.toLocaleDateString("en-IN", {
       day: "2-digit",
@@ -28,9 +30,11 @@ export const exportToCSV = (transactions, month, year) => {
     return [
       date,
       time,
-      txn.type,
-      txn.category,
-      txn.note || "",
+      txn.type.toUpperCase(),
+      txn.bank || "Cash",
+      txn.mode || "UPI",
+      txn.category || "Others",
+      (txn.note || "").replace(/"/g, '""'),
       txn.amount,
     ];
   });
@@ -47,11 +51,11 @@ export const exportToCSV = (transactions, month, year) => {
   });
 
   const url = URL.createObjectURL(blob);
-
   const a = document.createElement("a");
   a.href = url;
-  a.download = `expenses_${month}_${year}.csv`;
+  a.download = `expense_statement_${month}_${year}.csv`;
+  document.body.appendChild(a);
   a.click();
-
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 };

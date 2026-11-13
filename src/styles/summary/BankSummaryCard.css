@@ -1,0 +1,129 @@
+.bank-summary-card {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.05));
+  backdrop-filter: var(--glass-blur, blur(10px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--glass-shadow, 0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+.bank-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.bank-summary-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main, #ffffff);
+  margin: 0;
+}
+
+.bank-filter-clear-btn {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bank-filter-clear-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #fff;
+}
+
+.bank-summary-empty {
+  font-size: 13px;
+  color: var(--text-muted, #94a3b8);
+  margin: 0;
+}
+
+.bank-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.bank-chip {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bank-chip:hover {
+  background: rgba(30, 41, 59, 0.7);
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+.bank-chip.selected {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.bank-chip-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.bank-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.bank-tx-count {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.bank-chip-amounts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bank-net {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bank-net.income {
+  color: #34d399;
+}
+
+.bank-net.expense {
+  color: #f87171;
+}
+
+.bank-sub-amounts {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.sub-expense {
+  color: #fca5a5;
+}
+
+.sub-income {
+  color: #86efac;
+}
+
