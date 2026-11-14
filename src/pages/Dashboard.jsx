@@ -5,7 +5,6 @@ import BankSummaryCard from "../components/summary/BankSummaryCard";
 import ExpensePieChart from "../components/charts/ExpensePieChart";
 import MonthlyBarChart from "../components/charts/MonthlyBarChart";
 import MonthlyComparisonChart from "../components/charts/MonthlyComparisonChart";
-import CategorySummary from "../components/summary/CategorySummary";
 import FilterBar from "../components/filters/FilterBar";
 import TransactionForm from "../components/transactions/TransactionForm";
 import TransactionList from "../components/transactions/TransactionList";
@@ -100,8 +99,6 @@ const Dashboard = () => {
               <div className="comparison-row">
                 <MonthlyComparisonChart />
               </div>
-
-              <CategorySummary />
             </div>
           )}
 
@@ -129,7 +126,6 @@ const Dashboard = () => {
               <div className="comparison-row">
                 <MonthlyComparisonChart />
               </div>
-              <CategorySummary />
             </div>
           )}
 

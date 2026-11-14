@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useExpense } from "../../context/ExpenseContext";
-import { CATEGORIES } from "../../constants/categories";
 import { PAYMENT_MODES, getPaymentModeIcon } from "../../constants/paymentModes";
 import {
   Plus,
@@ -9,7 +8,6 @@ import {
   X,
   Building,
   Calendar as CalendarIcon,
-  Tag,
   CreditCard,
   FileText,
 } from "lucide-react";
@@ -30,7 +28,6 @@ const TransactionForm = ({ onFinished }) => {
 
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("expense");
-  const [category, setCategory] = useState("Others");
   const [bank, setBank] = useState("Cash");
   const [mode, setMode] = useState("UPI");
   const [date, setDate] = useState(getTodayString());
@@ -47,7 +44,6 @@ const TransactionForm = ({ onFinished }) => {
     if (editingTransaction) {
       setAmount(editingTransaction.amount);
       setType(editingTransaction.type);
-      setCategory(editingTransaction.category || "Others");
       setBank(editingTransaction.bank || (banks[0] || "Cash"));
       setMode(editingTransaction.mode || "UPI");
       setDate(
@@ -80,7 +76,6 @@ const TransactionForm = ({ onFinished }) => {
   const resetForm = () => {
     setAmount("");
     setType("expense");
-    setCategory("Others");
     setBank(banks[0] || "Cash");
     setMode("UPI");
     setDate(getTodayString());
@@ -98,7 +93,7 @@ const TransactionForm = ({ onFinished }) => {
         ...editingTransaction,
         amount: Number(amount),
         type,
-        category,
+        category: editingTransaction.category || "General",
         bank,
         mode,
         date,
@@ -109,7 +104,7 @@ const TransactionForm = ({ onFinished }) => {
         id: Date.now().toString(),
         amount: Number(amount),
         type,
-        category,
+        category: "General",
         bank,
         mode,
         date,
@@ -194,7 +189,7 @@ const TransactionForm = ({ onFinished }) => {
           </div>
         </div>
 
-        {/* Row 2: Bank, Mode, Category, Date */}
+        {/* Row 2: Bank, Mode, Date */}
         <div className="form-fields-grid">
           {/* Bank Selection */}
           <div className="input-field">
@@ -225,23 +220,6 @@ const TransactionForm = ({ onFinished }) => {
               {PAYMENT_MODES.map((m) => (
                 <option key={m} value={m}>
                   {getPaymentModeIcon(m)} {m}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Category */}
-          <div className="input-field">
-            <label>
-              <Tag size={14} /> Category
-            </label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              {CATEGORIES.map((c) => (
-                <option key={c} value={c}>
-                  {c}
                 </option>
               ))}
             </select>
