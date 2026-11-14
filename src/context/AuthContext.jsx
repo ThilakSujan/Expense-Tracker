@@ -30,6 +30,36 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  // Inactivity auto-logout (30 minutes of no interaction) for client privacy
+  useEffect(() => {
+    if (!currentUser) return;
+
+    const INACTIVITY_LIMIT_MS = 30 * 60 * 1000; // 30 minutes
+    let inactivityTimer;
+
+    const resetInactivityTimer = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        console.warn("Inactivity timeout reached: automatically signing out for security.");
+        signOut(auth);
+      }, INACTIVITY_LIMIT_MS);
+    };
+
+    const activityEvents = ["mousedown", "keydown", "scroll", "touchstart"];
+    activityEvents.forEach((event) =>
+      window.addEventListener(event, resetInactivityTimer, { passive: true })
+    );
+
+    resetInactivityTimer();
+
+    return () => {
+      clearTimeout(inactivityTimer);
+      activityEvents.forEach((event) =>
+        window.removeEventListener(event, resetInactivityTimer)
+      );
+    };
+  }, [currentUser]);
+
   return (
     <AuthContext.Provider
       value={{ currentUser, register, login, logout }}

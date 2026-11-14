@@ -49,8 +49,15 @@ export const addTransactionToFirestore = async (userId, transaction) => {
   const docId = transaction.id ? transaction.id.toString() : Date.now().toString();
   const txRef = doc(db, "users", userId, "transactions", docId);
   await setDoc(txRef, {
-    ...transaction,
+    amount: Number(transaction.amount),
+    type: transaction.type || "expense",
+    bank: transaction.bank || "Cash",
+    mode: transaction.mode || "UPI",
+    category: transaction.category || "General",
+    date: transaction.date || new Date().toISOString().split("T")[0],
+    note: transaction.note || "",
     id: docId,
+    createdAt: transaction.createdAt || new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   });
 };
@@ -65,7 +72,13 @@ export const updateTransactionInFirestore = async (userId, transaction) => {
   await setDoc(
     txRef,
     {
-      ...transaction,
+      amount: Number(transaction.amount),
+      type: transaction.type || "expense",
+      bank: transaction.bank || "Cash",
+      mode: transaction.mode || "UPI",
+      category: transaction.category || "General",
+      date: transaction.date || new Date().toISOString().split("T")[0],
+      note: transaction.note || "",
       id: docId,
       updatedAt: new Date().toISOString(),
     },

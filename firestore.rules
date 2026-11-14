@@ -1,15 +1,44 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Only authenticated users can access their own data
-    match /users/{userId}/{allPaths=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
     }
 
-    // Deny access to any other paths
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidTransaction() {
+      let data = request.resource.data;
+      return data.amount is number
+        && data.amount > 0
+        && data.type in ['income', 'expense']
+        && data.bank is string
+        && data.mode is string;
+    }
+
+    // 1. Transaction collection validation
+    match /users/{userId}/transactions/{txId} {
+      allow read, delete: if isOwner(userId);
+      allow create, update: if isOwner(userId) && isValidTransaction();
+    }
+
+    // 2. User settings & preferences (budget, custom banks)
+    match /users/{userId}/settings/{settingId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // 3. Fallback for any other user-scoped paths
+    match /users/{userId}/{document=**} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // 4. Absolute denial for all other collections
     match /{document=**} {
       allow read, write: if false;
     }
   }
 }
-
